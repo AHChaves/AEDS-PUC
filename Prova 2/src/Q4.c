@@ -13,7 +13,7 @@ float Media(float* v, int n){
     return soma/n;
 }
 
-float DesvioPadrao(float* v, int n, int media){
+float DesvioPadrao(float* v, int n, float media){
 
     float desvio, sub;
 
