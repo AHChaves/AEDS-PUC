@@ -13,21 +13,23 @@ float Media(float* v, int n){
     return soma/n;
 }
 
-float DesvioPadrao(float* v, int n, float media){
+double DesvioPadrao(float* v, int n, float media){
 
-    float desvio, sub;
+    double desvio;
+    float sub = 0;
 
     for(int i = 0; i < n; i++)
-        sub += v[i]-media;
+        sub += pow((v[i]-media),2 );
     
-    desvio = sqrt(pow(sub, 2)/(n-1));
+    desvio = sqrt(sub/(n-1));
 
     return desvio;
 }
 
 int main(){
 
-    float* vetor, media, desvio;
+    float* vetor, media;
+    double desvio;
     int nElementos;
 
     printf("Informe o numero de elementos: ");
@@ -44,7 +46,7 @@ int main(){
 
     desvio = DesvioPadrao(vetor, nElementos, media);
 
-    printf("Media: %f\nDesvio Padrao: %f", media, desvio);
+    printf("Media: %f\nDesvio Padrao: %lf", media, desvio);
 
     return 0;
 }
