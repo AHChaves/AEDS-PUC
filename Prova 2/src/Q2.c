@@ -34,5 +34,8 @@ int main(){
 
     printf("Maior valor: %d", maior_valor);
 
+    free(v1);
+    free(v2);
+    
     return 0;
 }
