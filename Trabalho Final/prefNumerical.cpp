@@ -1,8 +1,6 @@
 #include <iostream>
-#include "prefNumerical.h"
+#include "./headers/prefNumerical.h"
 
 void Preferencias_Numericas::AtribuirDados(){
-
-    
 
 }

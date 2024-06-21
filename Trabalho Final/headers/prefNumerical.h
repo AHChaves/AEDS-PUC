@@ -6,5 +6,5 @@ class Preferencias_Numericas: public Preferencias{
     public:
         Preferencias_Numericas(){};
         ~Preferencias_Numericas();
-        void AtribuirDados();
+        void AtribuirDados() override;
 };

@@ -12,8 +12,8 @@ private:
 public:
     Preferencias(){};
     ~Preferencias();
-    void AtribuirDados();
     void AddNomes(string nome);
     void AddValores(float valor);
+    virtual void AtribuirDados();
 
 };

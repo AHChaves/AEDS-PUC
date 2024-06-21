@@ -1,4 +1,4 @@
-#include "preferencias.h"
+#include "./headers/preferencias.h"
 
 void Preferencias::AddNomes(string nome){
     this->nomeDados.push_back(nome);
