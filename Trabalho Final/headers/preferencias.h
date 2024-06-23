@@ -1,19 +1,21 @@
 #include <string>
-#include <list>
+#include <vector>
 
 using namespace std;
 
 class Preferencias{
 
 private:
-    list<string> nomeDados ;
-    list<float> valores;
+    vector<string> nomeDados;
+    vector<vector<float>> valores;
 
 public:
     Preferencias(){};
-    ~Preferencias();
+    ~Preferencias(){};
     void AddNomes(string nome);
-    void AddValores(float valor);
+    void AddValores(vector<float> lista, float valor);
+    string GetNameAt(int i);
+    vector<float> GetValuesAt(int i);
+    int SizeofNomes();
     virtual void AtribuirDados();
-
 };
