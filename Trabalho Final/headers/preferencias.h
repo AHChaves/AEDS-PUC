@@ -1,3 +1,5 @@
+#ifndef PREF
+#define PREF
 #include <string>
 #include <vector>
 
@@ -16,7 +18,7 @@ public:
     //Adicionar valores
     void AddNomes(string nome);
     void AddValores(vector<float> lista, float valor);
-    virtual void AtribuirDados();
+    virtual void AtribuirDados(){};
     
     //impressão
     void PrintValues();
@@ -29,3 +31,5 @@ public:
     int SizeofNomes();
     int SizeofValores(vector<float> vetor);
 };
+
+#endif 
