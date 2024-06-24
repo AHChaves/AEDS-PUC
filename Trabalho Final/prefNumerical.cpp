@@ -17,6 +17,7 @@ void Preferencias_Numericas::InserirCategoria(){
             cout << "Informe o quao importante esse dado eh em comparacao com " 
             << GetNameAt(i) << endl;
             cin >> value;
+            AddValues(i, (1/value));
         }
         AddValues(SizeofNomes() - 1, value);
     }
@@ -49,6 +50,7 @@ void Preferencias_Numericas::AtribuirDados(){
                 cout << "opcao invalida!" << endl;
                 break;
         }
+        
     }while(option != 0);
 
 }
