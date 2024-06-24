@@ -19,7 +19,7 @@ int InverteVetorAchaMaior(int* v1, int* v2, int n){
 
 int main(){
 
-    int *v1, *v2, n, maior_valor;
+    int *v1, *v2, n, maior_value;
 
     printf("Informe a quantidade de elementos: ");
     scanf("%d", &n);
@@ -30,9 +30,9 @@ int main(){
     for(int i = 0; i < n; i++)
         v1[i] = i;
 
-    maior_valor = InverteVetorAchaMaior(v1, v2, n);
+    maior_value = InverteVetorAchaMaior(v1, v2, n);
 
-    printf("Maior valor: %d", maior_valor);
+    printf("Maior value: %d", maior_value);
 
     free(v1);
     free(v2);

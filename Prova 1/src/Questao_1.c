@@ -79,7 +79,7 @@ int main(){
     do{
         InicializaVetor(resultados);
 
-        printf("Informe a distancia até o destino (insira o valor negativo para finalizar o programa): ");
+        printf("Informe a distancia até o destino (insira o value negativo para finalizar o programa): ");
         scanf("%f", &distancia);
 
         ImprimeTempoOpcoes(distancia, resultados);

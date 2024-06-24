@@ -9,27 +9,27 @@ class Preferencias{
 
 private:
     vector<string> nomeDados;
-    vector<vector<float>> valores;
+    vector<vector<float>> values;
 
 public:
     Preferencias(){};
     ~Preferencias(){};
     
-    //Adicionar valores
+    //Adicionar value
     void AddNomes(string nome);
-    void AddValores(vector<float> lista, float valor);
+    void AddValues(int i, float value);
     virtual void AtribuirDados(){};
     
     //impressão
     void PrintValues();
 
-    //valores na posição i
+    //value na posição i
     string GetNameAt(int i);
     vector<float> GetValuesAt(int i);
     
     //tamanho
     int SizeofNomes();
-    int SizeofValores(vector<float> vetor);
+    int SizeofValues(vector<float> vetor);
 };
 
 #endif 

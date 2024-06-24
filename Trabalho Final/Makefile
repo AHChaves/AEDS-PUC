@@ -1,8 +1,8 @@
 all: main.o preference.o numerical.o
 	g++ main.o preference.o numerical.o -o main
 
-main: main.cpp
-	g++ -o main.cpp
+main.o: main.cpp
+	g++ -c main.cpp
 
 preference.o: preferencias.cpp ./headers/prefNumerical.h
 	g++ -c preferencias.cpp
