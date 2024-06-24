@@ -4,6 +4,8 @@
 
 class Preferencias_Numericas: public Preferencias{
 
+    void InserirCategoria();
+
     public:
         Preferencias_Numericas(){};
         ~Preferencias_Numericas(){};

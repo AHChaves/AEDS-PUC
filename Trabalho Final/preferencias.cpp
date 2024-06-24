@@ -19,7 +19,7 @@ void Preferencias::AddValues(int i, float value){
 
 void Preferencias::PrintValues(){
 
-    for(int i =0; i < SizeofNomes(); i++){
+    for(int i = 0; i < SizeofNomes(); i++){
         cout << this->nomeDados.at(i) << endl;
         for(int j = 0; j < SizeofValues(GetValuesAt(i)); j++){
             cout << this->values.at(i).at(j) << ' ';
