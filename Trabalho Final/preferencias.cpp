@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include "./headers/preferencias.h"
 
 void Preferencias::AddNomes(string nome){
@@ -17,12 +18,36 @@ void Preferencias::AddValues(int i, float value){
     }
 }
 
+int Preferencias::TableColumnsWidth(){
+
+    int biggest = 0;
+
+    for(const auto x:this->nomeDados)
+        if(biggest < x.size())
+            biggest = x.size();
+
+    return biggest;
+}
+
 void Preferencias::PrintValues(){
 
+    cout << setprecision(2);
+
+    int width = TableColumnsWidth();    
+
+    cout << setw(width+2) << "|";
     for(int i = 0; i < SizeofNomes(); i++){
-        cout << this->nomeDados.at(i) << endl;
-        for(int j = 0; j < SizeofValues(GetValuesAt(i)); j++){
-            cout << this->values.at(i).at(j) << ' ';
+       cout << setw(width)<< this->nomeDados.at(i) << " |";
+    }
+    cout << endl;
+
+    cout << string(15*SizeofNomes() + 4*SizeofNomes()+ 2*width, '-') << endl;
+
+    for(int i = 0; i < SizeofNomes(); i++){
+        cout << setw(width)<< this->nomeDados.at(i) << " |";
+
+        for(int j = 0; j < SizeofNomes(); j++){
+            cout << setw(width) <<this->values.at(i).at(j) <<" |";
         }
         cout << endl;
     }
