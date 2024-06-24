@@ -3,7 +3,7 @@
 
 void Preferencias_Numericas::AtribuirDados(){
     
-    string nome;
+    string name;
     float value;
     int option;
 
@@ -19,13 +19,18 @@ void Preferencias_Numericas::AtribuirDados(){
 
             case 1:
                 cout << "Insira o nome da categoria: " << endl;
-                cin >> nome;
-                this->AddNomes(nome);   
+                cin >> name;
+                this->AddNomes(name);   
 
                 for(int i =0; i < SizeofNomes(); i++){
-                    cout << "Informe o quão importante esse dado é em comparação com " << GetNameAt(i) << endl;
-                    cin >> value;
-                    AddValues(i, value);
+                    if(name.compare(GetNameAt(i)) == 0){
+                        value = 1;
+                    }
+                    else{
+                        cout << "Informe o quão importante esse dado é em comparação com " << GetNameAt(i) << endl;
+                        cin >> value;
+                    }
+                    AddValues(SizeofNomes() -1, value);
                 }
                 break;
             case 0: break;
