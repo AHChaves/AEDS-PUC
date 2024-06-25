@@ -13,6 +13,7 @@ class Matrix{
 public:
 
     //Adicionar value
+    void SetNames(vector<string> names);
     void AddNomes(string nome);
     void AddValues(int i, float value);
 

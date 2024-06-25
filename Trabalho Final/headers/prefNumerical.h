@@ -4,7 +4,7 @@
 
 class Preferencias_Numericas: public Preferencias{
 
-    void InsertValues();
+    void InsertMatrix(vector<string> names);
     vector<string> Name_Options();
 
     public:

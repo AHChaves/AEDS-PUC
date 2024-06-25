@@ -4,11 +4,12 @@
 
 class Preferencias{
 
-private:
+protected:
     vector<string> atribute;
     vector<Matrix> matrix;
 
 public:
+
     Preferencias(){};
     ~Preferencias(){};
     
@@ -17,7 +18,7 @@ public:
     
     //impressão
     void PrintValues();
-    
+
 };
 
 #endif 

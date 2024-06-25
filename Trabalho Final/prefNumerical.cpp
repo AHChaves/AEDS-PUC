@@ -11,7 +11,7 @@ vector<string> Preferencias_Numericas::Name_Options(){
 
         cout << "Escolha uma opcao" << endl;
         cout << "[0] Sair" << endl;
-        cout << "[1] Inserir nova opcao" << endl;
+        cout << "[1] Inserir opcao" << endl;
         cout << "> ";
         cin >> option;
 
@@ -40,26 +40,35 @@ vector<string> Preferencias_Numericas::Name_Options(){
     return names;
 }
 
-void Preferencias_Numericas::InsertValues(){
+void Preferencias_Numericas::InsertMatrix(vector<string> names){
+    
     string name;
     float value;
+    Matrix aux;
 
-    cout << "Insira o nome da categoria: " << endl;
+    cout << "Insira o nome do atributo: " << endl;
     getline(cin, name);
-    AddNomes(name);   
+    this->atribute.push_back(name);
 
-    for(int i = 0; i < SizeofNomes(); i++){
-        if(name.compare(GetNameAt(i)) == 0){
-            value = 1;
+    aux.SetNames(names);
+
+    for(int i = 0; i < aux.SizeofNomes(); i++){
+        for(int j = 0; j <= i; j++){
+            if(j == i){
+                value = 1;
+            }
+            else{
+                cout << "Informe o quao melhor esse dado na " 
+                << aux.GetNameAt(i)<< " eh melhor do que na " << aux.GetNameAt(j) 
+                << endl;
+                cin >> value;
+                aux.AddValues(j, (1/value));
+            }
+            aux.AddValues(i, value);
         }
-        else{
-            cout << "Informe o quao importante esse dado eh em comparacao com " 
-            << GetNameAt(i) << endl;
-            cin >> value;
-            AddValues(i, (1/value));
-        }
-        AddValues(SizeofNomes() - 1, value);
     }
+
+    this->matrix.push_back(aux);
 }
 
 void Preferencias_Numericas::AtribuirDados(){
@@ -67,8 +76,7 @@ void Preferencias_Numericas::AtribuirDados(){
     int option;
     vector<string> optionsNames = Name_Options();
 
-    InsertValues();
-    InsertValues();
+    InsertMatrix(optionsNames);
 
     do{
 
@@ -83,7 +91,7 @@ void Preferencias_Numericas::AtribuirDados(){
         switch(option){
 
             case 1:
-                InsertValues();
+                InsertMatrix(optionsNames);
                 break;
             case 0: break;
             default:

@@ -1,6 +1,8 @@
 #include "./headers/matrix.h"
 
-
+void Matrix::SetNames(vector<string> names){
+    this->options = names;
+}   
 
 void Matrix::AddNomes(string nome){
     this->options.push_back(nome);
