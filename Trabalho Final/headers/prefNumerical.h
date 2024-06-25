@@ -4,7 +4,8 @@
 
 class Preferencias_Numericas: public Preferencias{
 
-    void InserirCategoria();
+    void InsertValues();
+    vector<string> Name_Options();
 
     public:
         Preferencias_Numericas(){};

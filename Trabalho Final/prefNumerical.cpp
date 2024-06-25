@@ -1,7 +1,46 @@
 #include <iostream>
 #include "./headers/prefNumerical.h"
 
-void Preferencias_Numericas::InserirCategoria(){
+vector<string> Preferencias_Numericas::Name_Options(){
+
+    string aux;
+    vector<string> names;
+    int option;
+
+    do{
+
+        cout << "Escolha uma opcao" << endl;
+        cout << "[0] Sair" << endl;
+        cout << "[1] Inserir nova opcao" << endl;
+        cout << "> ";
+        cin >> option;
+
+        getchar();
+
+        switch (option)
+        {
+        case 0:
+            if(names.size() <  2){
+                cout << "Insira pelo menos 2 opcoes de comparacao!" << endl;
+                option = 1;
+            }
+            break;
+        case 1:
+            cout << "Nome da opcao: ";
+            getline(cin, aux);
+            names.push_back(aux);
+            break;
+        default:
+            cout << "Opcao invaldia!" << endl;
+            break;
+        }
+
+    }while(option != 0);
+
+    return names;
+}
+
+void Preferencias_Numericas::InsertValues(){
     string name;
     float value;
 
@@ -26,9 +65,10 @@ void Preferencias_Numericas::InserirCategoria(){
 void Preferencias_Numericas::AtribuirDados(){
     
     int option;
+    vector<string> optionsNames = Name_Options();
 
-    InserirCategoria();
-    InserirCategoria();
+    InsertValues();
+    InsertValues();
 
     do{
 
@@ -43,7 +83,7 @@ void Preferencias_Numericas::AtribuirDados(){
         switch(option){
 
             case 1:
-                InserirCategoria();
+                InsertValues();
                 break;
             case 0: break;
             default:
