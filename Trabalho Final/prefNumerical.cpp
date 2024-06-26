@@ -11,7 +11,7 @@ vector<string> Preferencias_Numericas::Name_Options(){
 
         cout << "Escolha uma opcao" << endl;
         cout << "[0] Sair" << endl;
-        cout << "[1] Inserir opcao" << endl;
+        cout << "[1] Inserir dado" << endl;
         cout << "> ";
         cin >> option;
 
@@ -26,12 +26,12 @@ vector<string> Preferencias_Numericas::Name_Options(){
             }
             break;
         case 1:
-            cout << "Nome da opcao: ";
+            cout << "Nome do dado: ";
             getline(cin, aux);
             names.push_back(aux);
             break;
         default:
-            cout << "Opcao invaldia!" << endl;
+            cout << "Opcao invalida!" << endl;
             break;
         }
 
@@ -46,7 +46,7 @@ void Preferencias_Numericas::InsertMatrix(vector<string> names){
     float value;
     Matrix aux;
 
-    cout << "Insira o nome do atributo: " << endl;
+    cout << "Insira o nome da tabela: " << endl;
     getline(cin, name);
     this->atribute.push_back(name);
 
@@ -58,8 +58,8 @@ void Preferencias_Numericas::InsertMatrix(vector<string> names){
                 value = 1;
             }
             else{
-                cout << "Informe o quao melhor esse dado na " 
-                << aux.GetNameAt(i)<< " eh melhor do que na " << aux.GetNameAt(j) 
+                cout << "Informe o quao melhor " 
+                << aux.GetNameAt(i)<< " eh em comparacao com " << aux.GetNameAt(j) 
                 << endl;
                 cin >> value;
                 aux.AddValues(j, (1/value));
@@ -71,34 +71,34 @@ void Preferencias_Numericas::InsertMatrix(vector<string> names){
     this->matrix.push_back(aux);
 }
 
+void Preferencias_Numericas::InsertMatrix(vector<string> names, vector<string> products){
+
+    string name;
+    float value;
+    Matrix aux;
+
+    cout << "Insira o nome da tabela: " << endl;
+    getline(cin, name);
+    this->atribute.push_back(name);
+
+    aux.SetNames(names, products);
+
+    
+
+}
+
 void Preferencias_Numericas::AtribuirDados(){
     
     int option;
+    
+    cout << "Informe os nomes das bases de comparacao" << endl;
     vector<string> optionsNames = Name_Options();
+
+    cout << "Informe os nomes dos produtos" << endl;
+    vector<string> productsNames = Name_Options();
 
     InsertMatrix(optionsNames);
 
-    do{
-
-        cout << "Deseja continuar inserindo categorias de comparacao?" << endl;
-        cout << "[1] Continuar" << endl;
-        cout << "[0] Parar" << endl;
-        cout << "> ";
-        cin >> option;
-
-        getchar();
-
-        switch(option){
-
-            case 1:
-                InsertMatrix(optionsNames);
-                break;
-            case 0: break;
-            default:
-                cout << "opcao invalida!" << endl;
-                break;
-        }
-        
-    }while(option != 0);
+    InsertMatrix(optionsNames, productsNames);
 
 }
