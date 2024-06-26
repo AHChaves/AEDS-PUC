@@ -2,12 +2,12 @@
 
 void Matrix::SetNames(vector<string> names){
     this->options = names;
-    this.products = names;
+    this->products = names;
 }   
 
 void Matrix::SetNames(vector<string> names, vector<string> products){
     this->options = names;
-    this.products = products;
+    this->products = products;
 }   
 
 void Matrix::AddNomes(string nome){
@@ -48,6 +48,10 @@ vector<float> Matrix::GetValuesAt(int i){
 
 int Matrix::SizeofNomes(){
     return this->options.size();
+}
+
+int Matrix::SizeofProducts(){
+    return this->products.size();
 }
 
 int Matrix::SizeofValues(vector<float> vetor){

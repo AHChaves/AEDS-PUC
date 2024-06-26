@@ -8,14 +8,14 @@ using namespace std;
 class Matrix{
 
     vector<string> options;
-    vector<strin> products;
+    vector<string> products;
     vector<vector<float>> values;
 
 public:
 
     //Adicionar value
     void SetNames(vector<string> names);
-    void SetNames(vector<string> names, vector<strin> products);
+    void SetNames(vector<string> names, vector<string> products);
     void AddNomes(string nome);
     void AddValues(int i, float value);
 
@@ -28,6 +28,7 @@ public:
     
     //tamanho
     int SizeofNomes();
+    int SizeofProducts();
     int SizeofValues(vector<float> vetor);
 
 };
