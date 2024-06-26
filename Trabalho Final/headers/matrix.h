@@ -19,11 +19,12 @@ public:
     void AddNomes(string nome);
     void AddValues(int i, float value);
 
-    //Impressao
-    int TableColumnsWidth();
-
     //value na posição i
+    vector<string> GetNames();
     string GetNameAt(int i);
+
+    vector<string> GetProducts();
+    string GetProductAt(int i);
     vector<float> GetValuesAt(int i);
     
     //tamanho

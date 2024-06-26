@@ -1,8 +1,11 @@
-all: main.o preferencias.o prefNumerical.o
-	g++ main.o preferencias.o prefNumerical.o -o main
+all: main.o preferencias.o prefNumerical.o matrix.o
+	g++ main.o preferencias.o matrix.o prefNumerical.o -o main
 	rm -rf *.o
 	clear
 	.\main.exe
+
+matrix.o: matrix.cpp
+	g++ -c matrix.cpp
 
 main.o: main.cpp
 	g++ -c main.cpp 

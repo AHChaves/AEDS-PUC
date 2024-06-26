@@ -77,6 +77,7 @@ void Preferencias_Numericas::InsertMatrix(vector<string> names, vector<string> p
     float value;
     Matrix aux;
 
+    getchar();
     cout << "Insira o nome da tabela: " << endl;
     getline(cin, name);
     this->atribute.push_back(name);
@@ -84,13 +85,15 @@ void Preferencias_Numericas::InsertMatrix(vector<string> names, vector<string> p
     aux.SetNames(names, products);
 
     for(int i = 0; i < aux.SizeofNomes(); i++){
-        for(int j = 0; j <= aux.SizeofProducts(); j++){
-            cout << "Informe a qualidade do produto " << aux.GetNameAt(i) << " na categoria de "
+        for(int j = 0; j < aux.SizeofProducts(); j++){
+            cout << "Informe a qualidade do produto " << aux.GetProductAt(i) << " na categoria de "
             << aux.GetNameAt(j) << endl;
             cin >> value;
             aux.AddValues(j, value);
         }
     }
+    
+    this->matrix.push_back(aux);
 }
 
 void Preferencias_Numericas::AtribuirDados(){

@@ -26,20 +26,19 @@ void Matrix::AddValues(int i, float value){
     }
 }
 
-int Matrix::TableColumnsWidth(){
-
-    int biggest = 0;
-
-    for(const auto x:this->options)
-        if(biggest < x.size())
-            biggest = x.size();
-
-    return biggest;
+vector<string> Matrix::GetNames(){
+    return this->options;
 }
-
 
 string Matrix::GetNameAt(int i){
     return this->options.at(i);
+}
+
+vector<string> Matrix::GetProducts(){
+    return this->products;
+}
+string Matrix::GetProductAt(int i){
+    return this->products.at(i);
 }
 
 vector<float> Matrix::GetValuesAt(int i){

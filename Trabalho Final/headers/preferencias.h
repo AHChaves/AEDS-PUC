@@ -17,6 +17,7 @@ public:
     virtual void AtribuirDados() = 0;
     
     //impressão
+    int TableColumnsWidth(int i);
     void PrintValues();
 
 };
