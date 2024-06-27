@@ -37,6 +37,7 @@ string Matrix::GetNameAt(int i){
 vector<string> Matrix::GetProducts(){
     return this->products;
 }
+  
 string Matrix::GetProductAt(int i){
     return this->products.at(i);
 }

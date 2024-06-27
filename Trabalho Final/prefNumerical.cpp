@@ -45,6 +45,7 @@ void Preferencias_Numericas::InsertMatrix(vector<string> names){
     string name;
     float value;
     Matrix aux;
+    vector<float> vet_aux;
 
     cout << "Insira o nome da tabela: " << endl;
     getline(cin, name);
@@ -68,6 +69,10 @@ void Preferencias_Numericas::InsertMatrix(vector<string> names){
         }
     }
 
+    vet_aux = NewPriority(aux);
+
+    this->priority.push_back(vet_aux);
+    this->normalization.push_back(Normalization(aux, vet_aux));
     this->matrix.push_back(aux);
 }
 
