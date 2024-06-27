@@ -7,7 +7,6 @@ class Preferencias{
 protected:
     vector<string> atribute;
     vector<Matrix> matrix;
-    vector<Matrix> normalization;
     vector<vector<float>> priority;
 
 public:
@@ -16,8 +15,9 @@ public:
     ~Preferencias(){};
     
     // Ajustes de valores
-    vector<float> NewPriority(Matrix matrix);
+    vector<float> SumLines(Matrix matrix);
     Matrix Normalization(Matrix base, vector<float> prio);
+    vector<float> NewPriority(Matrix base);
     bool VerifyInconsistency();
 
     //Adicionar value

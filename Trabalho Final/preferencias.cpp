@@ -2,7 +2,7 @@
 #include <iomanip>
 #include "./headers/preferencias.h"
 
-vector<float> Preferencias::NewPriority(Matrix matrix){
+vector<float> Preferencias::SumLines(Matrix matrix){
 
     float sum;
     vector<float> line;
@@ -20,7 +20,7 @@ vector<float> Preferencias::NewPriority(Matrix matrix){
     return aux;
 }
 
-Matrix Preferencias::Normalization(Matrix base, vector<float> prio){
+Matrix Preferencias::Normalization(Matrix base, vector<float> sum){
 
     float div;
     Matrix matrix;
@@ -29,20 +29,38 @@ Matrix Preferencias::Normalization(Matrix base, vector<float> prio){
     for(int i = 0; i < base.SizeofProducts(); i++){
         line = base.GetValuesAt(i);
         for(int j = 0; j < base.SizeofNomes(); j++){
-            div = line.at(j) / prio.at(i);
+            div = line.at(j) / sum.at(i);
             matrix.AddValues(i, div);
         }
-        
     }
 
     return matrix;
 }
 
+vector<float> Preferencias::NewPriority(Matrix base){
+
+    vector<float> aux, lines;
+    float sum, div;
+    Matrix normalizated = Normalization(base, SumLines(base));
+    
+    for(int i = 0; i < base.SizeofNomes(); i++){
+        sum = 0;
+        for(int j = 0; j < base.SizeofProducts(); j++){
+            lines = normalizated.GetValuesAt(j);
+            sum += lines.at(i);
+        }
+        div = sum/base.SizeofProducts();
+        aux.push_back(div);
+    }
+
+    return aux;
+}
+
 bool Preferencias::VerifyInconsistency(){
 
-    bool isInconsistent;
+    
 
-    return isInconsistent;
+    return true;
 }
 
 int Preferencias::TableColumnsWidth(int i){
@@ -99,18 +117,4 @@ void Preferencias::PrintValues(){
         cout << "\n--------------------------------------------------\n\n";
     }
 
-    for(int i = 0; i < 1; i++){
-        width = TableColumnsWidth(i);
-        
-        for(int j = 0; j < num_Products; j++){
-
-            for(int k = 0; k < num_Options; k++){
-                cout << setw(width) << this->normalization.at(i).GetValuesAt(j).at(k)
-                <<" | ";
-            }
-            cout << endl;
-        } 
-
-        cout << "\n--------------------------------------------------\n\n";
-    }
 }
