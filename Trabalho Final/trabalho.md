@@ -1,1 +1,0 @@
-Este trabalho se trata de um metodo de escolha utilizando matriz em c++

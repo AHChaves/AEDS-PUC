@@ -34,7 +34,7 @@ Ponto_s MaisProximoOrigem(){
     pontos = (Ponto_s*)malloc(sizeof(Ponto_s)*nPontos);
 
     for(int i = 0; i < nPontos; i++){
-        printf("Informe, para o ponto n%d, os valores de x e y(nesse padrao: 'x y'): ", (i+1));
+        printf("Informe, para o ponto n%d, os value de x e y(nesse padrao: 'x y'): ", (i+1));
         scanf("%lf %lf", &pontos[i].x, &pontos[i].y);
         
         distancia_I = Distancia(zero, pontos[i]);

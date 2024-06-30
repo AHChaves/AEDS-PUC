@@ -38,7 +38,7 @@ int main(){
     vetor = (float*)malloc(sizeof(float)*nElementos);
 
     for(int i = 0; i < nElementos; i++){
-        printf("Informe o valor na posicao %d: ", (i+1));
+        printf("Informe o value na posicao %d: ", (i+1));
         scanf("%f", &vetor[i]);
     }
 
