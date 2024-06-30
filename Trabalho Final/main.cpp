@@ -1,7 +1,6 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <conio.h>
 #include <fstream> // Para manipulação de arquivos
 #include <stdlib.h>
 #include <iomanip>
@@ -52,7 +51,7 @@ public:
             getline(cin, criteria[i]);
         }
 
-        system("cls");
+        system("clear");
     }
 
     void inputCriteriaMatrix()
@@ -96,7 +95,7 @@ public:
             getline(cin, alternatives[i]);
         }
 
-        system("cls");
+        system("clear");
     }
 
     void inputAlternativeMatrices()
@@ -129,7 +128,7 @@ public:
             }
         }
 
-        system("cls");
+        system("clear");
     }
 
     void calculateCriteriaWeights()
@@ -253,7 +252,7 @@ public:
 
     bool InsertAHP()
     {
-        system("cls");
+        system("clear");
 
         cout << "Inform the number of criterias: ";
         cin >> this->n;
@@ -265,9 +264,10 @@ public:
             return false;
 
         cout << "Press any key to continue";
-        getch();
+        fflush(stdin);
+        cin.get();
 
-        system("cls");
+        system("clear");
 
         cout << "Inform the number of alternatives: ";
         cin >> this->m;
@@ -302,131 +302,137 @@ public:
     }
 };
 
-void saveAHPData(const vector<AHP> &ahp, const string &filename)
+// Função para salvar todos os dados de um vetor de objetos AHP em um arquivo
+void saveDataToFile(const vector<AHP> &ahps, const string &filename)
 {
     ofstream file(filename);
-
-    if (!file.is_open())
+    if (file.is_open())
     {
-        cout << "Erro ao abrir o arquivo para salvar." << endl;
-        return;
-    }
+        for (size_t index = 0; index < ahps.size(); ++index)
+        {
+            const AHP &ahp = ahps[index];
+            file << "AHP #" << index + 1 << endl;
 
-    for (const auto &instance : ahp)
+            file << "Critérios e Pesos:\n";
+            vector<string> criteria = ahp.getCriteria();
+            vector<double> criteriaWeights = ahp.getCriteriaWeights();
+
+            for (size_t i = 0; i < criteria.size(); ++i)
+            {
+                file << criteria[i] << ": " << criteriaWeights[i] << endl;
+            }
+
+            file << "\nAlternativas e Pesos:\n";
+            vector<string> alternatives = ahp.getAlternatives();
+            vector<double> alternativeWeights = ahp.getAlternativeWeights();
+
+            for (size_t i = 0; i < alternatives.size(); ++i)
+            {
+                file << alternatives[i] << ": " << alternativeWeights[i] << endl;
+            }
+
+        }
+        file.close();
+    }
+    else
     {
-        file << instance.getN() << " " << instance.getM() << endl;
-
-        // Salvar critérios
-        for (const auto &criterion : instance.getCriteria())
-        {
-            file << criterion << endl;
-        }
-
-        // Salvar pesos dos critérios
-        for (const auto &CWeights : instance.getCriteriaWeights())
-        {
-            file << CWeights << endl;
-        }
-        file << endl;
-
-        // Salvar alternativas
-        for (const auto &alternative : instance.getAlternatives())
-        {
-            file << alternative << endl;
-        }
-
-        // Salvar pesos das alternativas
-        for (const auto &alternativeW : instance.getAlternativeWeights())
-        {
-            file << alternativeW << endl;
-        }
-        file << endl;
+        cout << "Não foi possível abrir o arquivo para salvar os dados.\n";
     }
-
-    file.close();
-    cout << "Dados salvos com sucesso em " << filename << endl;
 }
 
-void loadAHPData(vector<AHP> &ahp, const string &filename) {
+// Função para ler os dados de um arquivo e carregar em um vetor de objetos AHP
+void loadDataFromFile(vector<AHP> &ahps, const string &filename)
+{
     ifstream file(filename);
-
-    if (!file.is_open()) {
-        cout << "Erro ao abrir o arquivo para leitura." << endl;
-        return;
-    }
-
-    ahp.clear(); // Limpa o vetor de AHPs para começar do zero
-
-    string line;
-    while (getline(file, line)) {
-        AHP instance;
+    if (file.is_open())
+    {
+        string line;
         int n, m;
-        stringstream ss(line);
+        AHP ahp;
+        vector<string> criteria;
+        vector<double> criteriaWeights;
+        vector<string> alternatives;
+        vector<double> alternativeWeights;
 
-        if (!(ss >> n >> m)) {
-            cout << "Erro ao ler os valores de n e m." << endl;
-            continue;
-        }
-
-        instance.setN(n);
-        instance.setM(m);
-
-        // Ler critérios
-        vector<string> criteria(n);
-        for (int i = 0; i < n; ++i) {
-            if (!getline(file, criteria[i])) {
-                cout << "Erro ao ler os nomes dos critérios." << endl;
-                continue;
+        while (getline(file, line))
+        {
+            if (line.find("AHP #") != string::npos)
+            {
+                if (!criteria.empty() || !alternatives.empty())
+                {
+                    ahp.setCriteria(criteria);
+                    ahp.setCriteriaWeights(criteriaWeights);
+                    ahp.setAlternatives(alternatives);
+                    ahp.setAlternativeWeights(alternativeWeights);
+                    ahps.push_back(ahp);
+                }
+                criteria.clear();
+                criteriaWeights.clear();
+                alternatives.clear();
+                alternativeWeights.clear();
+                n = 0;
+                m = 0;
+            }
+            else if (line.find("Critérios e Pesos:") != string::npos)
+            {
+                while (getline(file, line) && !line.empty() && line.find("Alternativas e Pesos:") == string::npos)
+                {
+                    size_t colonPos = line.find(":");
+                    if (colonPos != string::npos)
+                    {
+                        string criteriaName = line.substr(0, colonPos);
+                        double weight = stod(line.substr(colonPos + 1));
+                        criteria.push_back(criteriaName);
+                        criteriaWeights.push_back(weight);
+                        n++;
+                    }
+                }
+            }
+            if (line.find("Alternativas e Pesos:") != string::npos)
+            {
+                while (getline(file, line) && !line.empty() && line.find("AHP #") == string::npos)
+                {
+                    size_t colonPos = line.find(":");
+                    if (colonPos != string::npos)
+                    {
+                        string alternativeName = line.substr(0, colonPos);
+                        double weight = stod(line.substr(colonPos + 1));
+                        alternatives.push_back(alternativeName);
+                        alternativeWeights.push_back(weight);
+                        m++;
+                    }
+                }
             }
         }
-        instance.setCriteria(criteria);
 
-        // Ler pesos dos critérios
-        vector<double> criteriaWeights(n);
-        for (int i = 0; i < n; ++i) {
-            if (!(file >> criteriaWeights[i])) {
-                cout << "Erro ao ler os pesos dos critérios." << endl;
-                continue;
-            }
+        if (!criteria.empty() || !alternatives.empty())
+        {
+            ahp.setN(n);
+            ahp.setM(m);
+            ahp.setCriteria(criteria);
+            ahp.setCriteriaWeights(criteriaWeights);
+            ahp.setAlternatives(alternatives);
+            ahp.setAlternativeWeights(alternativeWeights);
+            ahps.push_back(ahp);
         }
-        instance.setCriteriaWeights(criteriaWeights);
 
-        // Ler alternativas
-        vector<string> alternatives(m);
-        for (int i = 0; i < m; ++i) {
-            if (!getline(file, alternatives[i])) {
-                cout << "Erro ao ler os nomes das alternativas." << endl;
-                continue;
-            }
-        }
-        instance.setAlternatives(alternatives);
-
-        // Ler pesos das alternativas
-        vector<double> alternativeWeights(m);
-        for (int i = 0; i < m; ++i) {
-            if (!(file >> alternativeWeights[i])) {
-                cout << "Erro ao ler os pesos das alternativas." << endl;
-                continue;
-            }
-        }
-        instance.setAlternativeWeights(alternativeWeights);
-
-        ahp.push_back(instance);
+        file.close();
     }
-
-    file.close();
-    cout << "Dados carregados com sucesso de " << filename << endl;
+    else
+    {
+        cout << "Não foi possível abrir o arquivo para ler os dados.\n";
+    }
 }
 
 int main()
 {
-    system("cls");
+    system("clear");
     int option;
     string file = "dados.txt";
 
     vector<AHP> ahp;
 
-    loadAHPData(ahp, file);
+    loadDataFromFile(ahp, file);
 
     do
     {
@@ -469,7 +475,7 @@ int main()
 
     } while (option != 0);
 
-    saveAHPData(ahp, file);
+    saveDataToFile(ahp, file);
 
     return 0;
 }

@@ -1,0 +1,8 @@
+AHP #1
+Critérios e Pesos:
+area: 0.9
+preco: 0.1
+
+Alternativas e Pesos:
+casa: 0.8625
+apartamento: 0.1375
