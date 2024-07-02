@@ -47,7 +47,7 @@ public:
 
         for (int i = 0; i < n; ++i)
         {
-            cout << "Digite o nome do criterio " << i + 1 << ": ";
+            cout << "type the name of the criteria " << i + 1 << ": ";
             getline(cin, criteria[i]);
         }
 
@@ -61,7 +61,7 @@ public:
 
         criteriaMatrix.resize(n, vector<double>(n, 0.0));
 
-        cout << "Digite a matriz de comparação dos critérios (" << n << "x" << n << "):" << endl;
+        cout << "type the comparation matrix of criterias (" << n << "x" << n << "):" << endl;
         for (int i = 0; i < n; ++i)
         {
             for (int j = i; j < n; ++j)
@@ -72,7 +72,7 @@ public:
                 }
                 else
                 {
-                    cout << "Digite o grau de dominacao que " << criteria[i] << " exerce sobre "
+                    cout << "type the domination value of " << criteria[i] << " on "
                          << criteria[j] << ": ";
                     cin >> value;
                     criteriaMatrix[i][j] = value;
@@ -91,7 +91,7 @@ public:
 
         for (int i = 0; i < m; i++)
         {
-            cout << "Digite o nome da alternativa " << i + 1 << ": ";
+            cout << "type the name of the alternative " << i + 1 << ": ";
             getline(cin, alternatives[i]);
         }
 
@@ -106,7 +106,7 @@ public:
 
         for (int i = 0; i < n; i++)
         {
-            cout << "Digite a matriz de comparação para o critério " << criteria[i] << " (" << m << "x" << m << "):" << endl;
+            cout << "type the comparation matrix for the criteria " << criteria[i] << " (" << m << "x" << m << "):" << endl;
 
             for (int j = 0; j < m; j++)
             {
@@ -118,7 +118,7 @@ public:
                     }
                     else
                     {
-                        cout << "Digite o grau de dominacao que " << alternatives[j] << " exerce sobre "
+                        cout << "type the domination value of " << alternatives[j] << " on "
                              << alternatives[k] << ": ";
                         cin >> value;
                         alternativeMatrices[i][j][k] = value;
@@ -245,7 +245,7 @@ public:
         else
             cr = ci / ri[10];
 
-        cout << "Razão de Consistência (CR): " << cr << endl;
+        cout << "Consistency reazon (CR): " << cr << endl;
 
         return (cr < 0.1) and (cr >= 0);
     }
@@ -288,13 +288,13 @@ public:
 
     void displayResults()
     {
-        cout << "\nPesos dos Critérios:" << endl;
+        cout << "\nCriterias Weights:" << endl;
         for (int i = 0; i < n; ++i)
         {
             cout << criteria[i] << ": " << criteriaWeights[i] << endl;
         }
 
-        cout << "\nPesos das Alternativas:" << endl;
+        cout << "\nAlternatives weights:" << endl;
         for (int i = 0; i < m; ++i)
         {
             cout << alternatives[i] << ": " << alternativeWeights[i] << endl;
@@ -336,7 +336,7 @@ void saveDataToFile(const vector<AHP> &ahps, const string &filename)
     }
     else
     {
-        cout << "Não foi possível abrir o arquivo para salvar os dados.\n";
+        cout << "Open file wasn't possible save data" << endl;
     }
 }
 
@@ -420,7 +420,7 @@ void loadDataFromFile(vector<AHP> &ahps, const string &filename)
     }
     else
     {
-        cout << "Não foi possível abrir o arquivo para ler os dados.\n";
+        cout << "Open file wasn't possible load data" << endl;
     }
 }
 
